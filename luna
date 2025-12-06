@@ -13,4 +13,379 @@
 -- ⣿⣿⣿⣤⣀⠀⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⣷⣆⠀⠀⠸⠿⣿⠟⠁⠀⠀⢸⣿
 -- ⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠙⠛⠛⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿
 -- ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀⠀⣀⣴⣶⣤⣴⣶⣶⣾⣿⣿⣿
-local player = game:GetService("Players").LocalPlayer local replicatedStorage = game:GetService("ReplicatedStorage") local workspace = game:GetService("Workspace") local TweenService = game:GetService("TweenService") local InjectTo = game:GetService("TestService") local specialChars = "1234567890QWRYUIOPASDFGHJKLZXVBMN+×÷=/_<>,!@#$%^&*?~\\|{}€£¥₩qwertyuiopasdfghjklzxcvbnm" local randomName = nil local function generateRandomName() local length = math.random(5, 10) local name = "" for i = 1, length do local index = math.random(1, #specialChars) name = name .. specialChars:sub(index, index) end return name end local function findRemoteEvent(name, parent) for _, child in ipairs(parent:GetDescendants()) do if child:IsA("RemoteEvent") and child.Name == name then return child end end return nil end local function getRemoteEvent() --// Change if the games have Renamed the AC6 Remotes name return findRemoteEvent("AC6_FE_Sounds", replicatedStorage) or findRemoteEvent("AC6_FE_Sounds", workspace) end local function playSound(soundId) local sound = Instance.new("Sound") sound.SoundId = soundId sound.Volume = 1 sound.PlayOnRemove = true sound.Parent = gethui() or game:GetService("CoreGui").RobloxGui sound:Destroy() end local function ExtraDetail(UI) Instance.new("UICorner", UI) local Stroke = Instance.new("UIStroke", UI) Stroke.ApplyStrokeMode = "Border" end --// UI library for the notification (not mine) credits to who ever made it :] local NotificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMinisterq/Notification-Library/Main/Library.lua"))() local remote = getRemoteEvent() if remote then playSound("rbxassetid://2084290015") NotificationLibrary:SendNotification("Success", "Người khác có thể nghe thấy nó?", 4) local gui = Instance.new("ScreenGui") gui.Name = "PUT_THE_PHONE_DOWN!THIS_IS_FOR_MY_SAFETY!" gui.Parent = gethui() or game:GetService("CoreGui").RobloxGui local mainFrame = Instance.new("Frame", gui) mainFrame.Size = UDim2.new(0, 300, 0, 200) mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100) mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 20) mainFrame.BorderSizePixel = 2 mainFrame.Active = true Instance.new("UIDragDetector",mainFrame) local corner = Instance.new("UICorner") corner.CornerRadius = UDim.new(0, 12) corner.Parent = mainFrame local titleBar = Instance.new("Frame", mainFrame) titleBar.Size = UDim2.new(1, 0, 0, 25) titleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 35) titleBar.BorderSizePixel = 1 local titleLabel = Instance.new("TextLabel", titleBar) titleLabel.Size = UDim2.new(1, -50, 1, 0) titleLabel.Position = UDim2.new(0, 5, 0, 0) titleLabel.Text = "FE MUSIC EXPLOIT [By Hanna]" titleLabel.TextColor3 = Color3.fromRGB(0, 255, 200) titleLabel.TextSize = 18 titleLabel.BackgroundTransparency = 1 titleLabel.Font = Enum.Font.SourceSansBold titleLabel.TextXAlignment = Enum.TextXAlignment.Left local closeButton = Instance.new("TextButton", titleBar) closeButton.Size = UDim2.new(0, 25, 1, 0) closeButton.Position = UDim2.new(1, -30, 0, 0) closeButton.Text = "X" closeButton.TextColor3 = Color3.fromRGB(255, 255, 255) closeButton.BackgroundColor3 = Color3.fromRGB(255, 60, 60) closeButton.Font = Enum.Font.GothamBold closeButton.TextSize = 18 local closeCorner = Instance.new("UICorner") closeCorner.CornerRadius = UDim.new(0, 6) closeCorner.Parent = closeButton local stroke = Instance.new("UIStroke") stroke.Thickness = 1.5 stroke.Color = Color3.fromRGB(255, 90, 90) stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border stroke.Parent = closeButton closeButton.MouseEnter:Connect(function() closeButton.BackgroundColor3 = Color3.fromRGB(255, 80, 80) stroke.Color = Color3.fromRGB(255, 120, 120) end) closeButton.MouseLeave:Connect(function() closeButton.BackgroundColor3 = Color3.fromRGB(255, 60, 60) stroke.Color = Color3.fromRGB(255, 90, 90) end) closeButton.MouseButton1Click:Connect(function() gui:Destroy() end) local minimizeButton = Instance.new("TextButton", titleBar) minimizeButton.Size = UDim2.new(0, 25, 1, 0) minimizeButton.Position = UDim2.new(1, -60, 0, 0) minimizeButton.Text = "-" minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255) minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80) minimizeButton.Font = Enum.Font.GothamBold minimizeButton.TextSize = 18 local minimizeCorner = Instance.new("UICorner") minimizeCorner.CornerRadius = UDim.new(0, 6) minimizeCorner.Parent = minimizeButton local stroke = Instance.new("UIStroke") stroke.Thickness = 1.5 stroke.Color = Color3.fromRGB(140, 140, 140) stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border stroke.Parent = minimizeButton minimizeButton.MouseEnter:Connect(function() minimizeButton.BackgroundColor3 = Color3.fromRGB(110, 110, 110) stroke.Color = Color3.fromRGB(180, 180, 180) end) minimizeButton.MouseLeave:Connect(function() minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80) stroke.Color = Color3.fromRGB(140, 140, 140) end) local textBox = Instance.new("TextBox", mainFrame) textBox.Size = UDim2.new(0.8, 0, 0.2, 0) textBox.Position = UDim2.new(0.1, 0, 0.2, 0) textBox.PlaceholderText = "[Nhập ID Nhạc Vào]" textBox.Text = "" textBox.TextColor3 = Color3.fromRGB(200, 255, 255) textBox.TextSize = 16 textBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30) textBox.BorderSizePixel = 1 textBox.Font = Enum.Font.Gotham ExtraDetail(textBox) local playButton = Instance.new("TextButton", mainFrame) playButton.Size = UDim2.new(0.4, 0, 0.2, 0) playButton.Position = UDim2.new(0.3, 0, 0.45, 0) playButton.Text = "Chạy!" playButton.TextColor3 = Color3.fromRGB(255, 255, 255) playButton.BackgroundColor3 = Color3.fromRGB(50, 120, 255) -- màu neon xanh playButton.Font = Enum.Font.GothamBold playButton.TextSize = 18 local corner = Instance.new("UICorner") corner.CornerRadius = UDim.new(0, 10) corner.Parent = playButton local stroke = Instance.new("UIStroke") stroke.Thickness = 2 stroke.Color = Color3.fromRGB(80, 160, 255) stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border stroke.Parent = playButton playButton.MouseEnter:Connect(function() playButton.BackgroundColor3 = Color3.fromRGB(70, 150, 255) stroke.Color = Color3.fromRGB(120, 200, 255) end) playButton.MouseLeave:Connect(function() playButton.BackgroundColor3 = Color3.fromRGB(50, 120, 255) stroke.Color = Color3.fromRGB(80, 160, 255) end) playButton.MouseButton1Down:Connect(function() playButton.BackgroundColor3 = Color3.fromRGB(40, 100, 220) end) playButton.MouseButton1Up:Connect(function() playButton.BackgroundColor3 = Color3.fromRGB(70, 150, 255) end) local loopLabel = Instance.new("TextLabel", mainFrame) loopLabel.Size = UDim2.new(0.2, 0, 0.05, 0) loopLabel.Position = UDim2.new(0.32, 0, 0.94, 0) loopLabel.Text = "Lặp lại?" loopLabel.TextColor3 = Color3.fromRGB(200, 200, 200) loopLabel.TextSize = 12 loopLabel.BackgroundTransparency = 1 loopLabel.Font = Enum.Font.GothamSemibold loopLabel.TextXAlignment = Enum.TextXAlignment.Right local loopButton = Instance.new("TextButton", mainFrame) loopButton.Size = UDim2.new(0.1, 0, 0.05, 0) loopButton.Position = UDim2.new(0.52, 0, 0.94, 0) loopButton.Text = "Bật" loopButton.TextColor3 = Color3.fromRGB(0, 255, 150) loopButton.BackgroundTransparency = 1 loopButton.Font = Enum.Font.GothamBold loopButton.TextSize = 12 loopButton.TextXAlignment = Enum.TextXAlignment.Left local loopEnabled = true loopButton.MouseEnter:Connect(function() if loopEnabled then loopButton.TextColor3 = Color3.fromRGB(0, 255, 200) else loopButton.TextColor3 = Color3.fromRGB(255, 80, 80) end end) loopButton.MouseLeave:Connect(function() if loopEnabled then loopButton.TextColor3 = Color3.fromRGB(0, 255, 150) else loopButton.TextColor3 = Color3.fromRGB(255, 0, 0) end end) loopButton.MouseButton1Click:Connect(function() loopEnabled = not loopEnabled if loopEnabled then loopButton.Text = "Bật" loopButton.TextColor3 = Color3.fromRGB(0, 255, 150) else loopButton.Text = "Tắt" loopButton.TextColor3 = Color3.fromRGB(255, 0, 0) end end) local volumeBox = Instance.new("TextBox", mainFrame) volumeBox.Size = UDim2.new(0.35, 0, 0.2, 0) volumeBox.Position = UDim2.new(0.1, 0, 0.7, 0) volumeBox.PlaceholderText = "[Âm lượng]" volumeBox.Text = "" volumeBox.TextColor3 = Color3.fromRGB(200, 255, 255) volumeBox.TextSize = 16 volumeBox.Font = Enum.Font.Gotham volumeBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30) volumeBox.ClearTextOnFocus = false local volCorner = Instance.new("UICorner", volumeBox) volCorner.CornerRadius = UDim.new(0, 8) local volStroke = Instance.new("UIStroke", volumeBox) volStroke.Thickness = 1.5 volStroke.Color = Color3.fromRGB(0, 255, 200) volStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border volumeBox.Focused:Connect(function() volStroke.Color = Color3.fromRGB(0, 255, 255) end) volumeBox.FocusLost:Connect(function() volStroke.Color = Color3.fromRGB(0, 255, 200) end) local pitchBox = Instance.new("TextBox", mainFrame) pitchBox.Size = UDim2.new(0.35, 0, 0.2, 0) pitchBox.Position = UDim2.new(0.55, 0, 0.7, 0) pitchBox.PlaceholderText = "[Tốc độ]" pitchBox.Text = "" pitchBox.TextColor3 = Color3.fromRGB(200, 255, 255) pitchBox.TextSize = 16 pitchBox.Font = Enum.Font.Gotham pitchBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30) pitchBox.ClearTextOnFocus = false local pitchCorner = Instance.new("UICorner", pitchBox) pitchCorner.CornerRadius = UDim.new(0, 8) local pitchStroke = Instance.new("UIStroke", pitchBox) pitchStroke.Thickness = 1.5 pitchStroke.Color = Color3.fromRGB(0, 255, 200) pitchStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border pitchBox.Focused:Connect(function() pitchStroke.Color = Color3.fromRGB(0, 255, 255) end) pitchBox.FocusLost:Connect(function() pitchStroke.Color = Color3.fromRGB(0, 255, 200) end) local isMinimized = false local lastPosition = UDim2.new(0.5, -150, 0.5, -100) local function toggleVisibility(visible) textBox.Visible = visible playButton.Visible = visible volumeBox.Visible = visible pitchBox.Visible = visible loopLabel.Visible = visible loopButton.Visible = visible end minimizeButton.MouseButton1Click:Connect(function() if isMinimized then lastPosition = mainFrame.Position toggleVisibility(true) local expandTween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.new(0, 300, 0, 200), Position = lastPosition }) expandTween:Play() else lastPosition = mainFrame.Position toggleVisibility(false) local minimizeTween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { Size = UDim2.new(0, 300, 0, 25), Position = UDim2.new(lastPosition.X.Scale, lastPosition.X.Offset, lastPosition.Y.Scale, lastPosition.Y.Offset) }) minimizeTween:Play() end
+local player = game:GetService("Players").LocalPlayer
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local workspace = game:GetService("Workspace")
+local TweenService = game:GetService("TweenService")
+local InjectTo = game:GetService("TestService")
+local specialChars = "1234567890QWRYUIOPASDFGHJKLZXVBMN+×÷=/_<>,!@#$%^&*?`~\\|{}€£¥₩qwertyuiopasdfghjklzxcvbnm"
+local randomName = nil
+
+local function generateRandomName()
+    local length = math.random(5, 10)
+    local name = ""
+    for i = 1, length do
+        local index = math.random(1, #specialChars)
+        name = name .. specialChars:sub(index, index)
+    end
+    return name
+end
+
+local function findRemoteEvent(name, parent)
+    for _, child in ipairs(parent:GetDescendants()) do
+        if child:IsA("RemoteEvent") and child.Name == name then
+            return child
+        end
+    end
+    return nil
+end
+
+local function getRemoteEvent() --// Change if the games have Renamed the AC6 Remotes name
+    return findRemoteEvent("AC6_FE_Sounds", replicatedStorage) or findRemoteEvent("AC6_FE_Sounds", workspace)
+end
+
+local function playSound(soundId)
+    local sound = Instance.new("Sound")
+    sound.SoundId = soundId
+    sound.Volume = 1
+    sound.PlayOnRemove = true
+    sound.Parent = gethui() or game:GetService("CoreGui").RobloxGui
+    sound:Destroy()
+end
+
+local function ExtraDetail(UI)
+    Instance.new("UICorner", UI)
+    local Stroke = Instance.new("UIStroke", UI)
+    Stroke.ApplyStrokeMode = "Border"
+end
+
+--// UI library for the notification (not mine) credits to who ever made it :]
+local NotificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMinisterq/Notification-Library/Main/Library.lua"))()
+
+local remote = getRemoteEvent()
+
+if remote then    
+    playSound("rbxassetid://2084290015")
+    NotificationLibrary:SendNotification("Success", "Người khác có thể nghe thấy nó?", 4)
+
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "PUT_THE_PHONE_DOWN!THIS_IS_FOR_MY_SAFETY!"
+    gui.Parent = gethui() or game:GetService("CoreGui").RobloxGui
+
+    local mainFrame = Instance.new("Frame", gui)
+    mainFrame.Size = UDim2.new(0, 300, 0, 200)
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -100)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+    mainFrame.BorderSizePixel = 2
+    mainFrame.Active = true
+    Instance.new("UIDragDetector",mainFrame)
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 12)
+    corner.Parent = mainFrame
+
+    local titleBar = Instance.new("Frame", mainFrame)
+    titleBar.Size = UDim2.new(1, 0, 0, 25)
+    titleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+    titleBar.BorderSizePixel = 1
+
+    local titleLabel = Instance.new("TextLabel", titleBar)
+    titleLabel.Size = UDim2.new(1, -50, 1, 0)
+    titleLabel.Position = UDim2.new(0, 5, 0, 0)
+    titleLabel.Text = "FE MUSIC EXPLOIT [By Hanna]"
+    titleLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
+    titleLabel.TextSize = 18
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Font = Enum.Font.SourceSansBold
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+    local closeButton = Instance.new("TextButton", titleBar)
+    closeButton.Size = UDim2.new(0, 25, 1, 0)
+    closeButton.Position = UDim2.new(1, -30, 0, 0)
+    closeButton.Text = "X"
+    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255) 
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 60, 60) 
+    closeButton.Font = Enum.Font.GothamBold
+    closeButton.TextSize = 18
+
+    local closeCorner = Instance.new("UICorner")
+    closeCorner.CornerRadius = UDim.new(0, 6)
+    closeCorner.Parent = closeButton
+
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 1.5
+    stroke.Color = Color3.fromRGB(255, 90, 90)
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    stroke.Parent = closeButton
+
+    closeButton.MouseEnter:Connect(function()
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+    stroke.Color = Color3.fromRGB(255, 120, 120)
+    end)
+
+    closeButton.MouseLeave:Connect(function()
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 60, 60)
+    stroke.Color = Color3.fromRGB(255, 90, 90)
+    end)
+
+    closeButton.MouseButton1Click:Connect(function()
+    gui:Destroy()
+    end)
+
+    local minimizeButton = Instance.new("TextButton", titleBar)
+    minimizeButton.Size = UDim2.new(0, 25, 1, 0)
+    minimizeButton.Position = UDim2.new(1, -60, 0, 0)
+    minimizeButton.Text = "-"
+    minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+    minimizeButton.Font = Enum.Font.GothamBold
+    minimizeButton.TextSize = 18
+
+    local minimizeCorner = Instance.new("UICorner")
+    minimizeCorner.CornerRadius = UDim.new(0, 6)
+    minimizeCorner.Parent = minimizeButton
+
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 1.5
+    stroke.Color = Color3.fromRGB(140, 140, 140)
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    stroke.Parent = minimizeButton
+
+    minimizeButton.MouseEnter:Connect(function()
+    minimizeButton.BackgroundColor3 = Color3.fromRGB(110, 110, 110)
+    stroke.Color = Color3.fromRGB(180, 180, 180)
+    end)
+
+    minimizeButton.MouseLeave:Connect(function()
+    minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+    stroke.Color = Color3.fromRGB(140, 140, 140)
+    end)
+
+
+    local textBox = Instance.new("TextBox", mainFrame)
+    textBox.Size = UDim2.new(0.8, 0, 0.2, 0)
+    textBox.Position = UDim2.new(0.1, 0, 0.2, 0)
+    textBox.PlaceholderText = "[Nhập ID Nhạc Vào]"
+    textBox.Text = ""
+    textBox.TextColor3 = Color3.fromRGB(200, 255, 255)
+    textBox.TextSize = 16
+    textBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+    textBox.BorderSizePixel = 1
+    textBox.Font = Enum.Font.Gotham
+    ExtraDetail(textBox)
+
+    local playButton = Instance.new("TextButton", mainFrame)
+    playButton.Size = UDim2.new(0.4, 0, 0.2, 0)
+    playButton.Position = UDim2.new(0.3, 0, 0.45, 0)
+    playButton.Text = "Chạy!"
+    playButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    playButton.BackgroundColor3 = Color3.fromRGB(50, 120, 255) -- màu neon xanh
+    playButton.Font = Enum.Font.GothamBold
+    playButton.TextSize = 18
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 10)
+    corner.Parent = playButton
+
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 2
+    stroke.Color = Color3.fromRGB(80, 160, 255)
+    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    stroke.Parent = playButton
+
+    playButton.MouseEnter:Connect(function()
+    playButton.BackgroundColor3 = Color3.fromRGB(70, 150, 255)
+    stroke.Color = Color3.fromRGB(120, 200, 255)
+    end)
+
+    playButton.MouseLeave:Connect(function()
+    playButton.BackgroundColor3 = Color3.fromRGB(50, 120, 255)
+    stroke.Color = Color3.fromRGB(80, 160, 255)
+    end)
+
+    playButton.MouseButton1Down:Connect(function()
+    playButton.BackgroundColor3 = Color3.fromRGB(40, 100, 220)
+    end)
+
+    playButton.MouseButton1Up:Connect(function()
+    playButton.BackgroundColor3 = Color3.fromRGB(70, 150, 255)
+    end)
+
+    local loopLabel = Instance.new("TextLabel", mainFrame)
+    loopLabel.Size = UDim2.new(0.2, 0, 0.05, 0)
+    loopLabel.Position = UDim2.new(0.32, 0, 0.94, 0)
+    loopLabel.Text = "Lặp lại?"
+    loopLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    loopLabel.TextSize = 12
+    loopLabel.BackgroundTransparency = 1
+    loopLabel.Font = Enum.Font.GothamSemibold
+    loopLabel.TextXAlignment = Enum.TextXAlignment.Right
+
+    local loopButton = Instance.new("TextButton", mainFrame)
+    loopButton.Size = UDim2.new(0.1, 0, 0.05, 0)
+    loopButton.Position = UDim2.new(0.52, 0, 0.94, 0)
+    loopButton.Text = "Bật"
+    loopButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+    loopButton.BackgroundTransparency = 1
+    loopButton.Font = Enum.Font.GothamBold
+    loopButton.TextSize = 12
+    loopButton.TextXAlignment = Enum.TextXAlignment.Left
+
+    local loopEnabled = true
+
+    loopButton.MouseEnter:Connect(function()
+    if loopEnabled then
+        loopButton.TextColor3 = Color3.fromRGB(0, 255, 200)
+    else
+        loopButton.TextColor3 = Color3.fromRGB(255, 80, 80)
+    end
+    end)
+
+    loopButton.MouseLeave:Connect(function()
+    if loopEnabled then
+        loopButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+    else
+        loopButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+    end
+    end)
+
+    loopButton.MouseButton1Click:Connect(function()
+    loopEnabled = not loopEnabled
+
+    if loopEnabled then
+        loopButton.Text = "Bật"
+        loopButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+    else
+        loopButton.Text = "Tắt"
+        loopButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+    end
+    end)
+
+    local volumeBox = Instance.new("TextBox", mainFrame)
+    volumeBox.Size = UDim2.new(0.35, 0, 0.2, 0)
+    volumeBox.Position = UDim2.new(0.1, 0, 0.7, 0)
+    volumeBox.PlaceholderText = "[Âm lượng]"
+    volumeBox.Text = ""
+    volumeBox.TextColor3 = Color3.fromRGB(200, 255, 255)
+    volumeBox.TextSize = 16
+    volumeBox.Font = Enum.Font.Gotham
+    volumeBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+    volumeBox.ClearTextOnFocus = false
+
+   local volCorner = Instance.new("UICorner", volumeBox)
+   volCorner.CornerRadius = UDim.new(0, 8)
+
+   local volStroke = Instance.new("UIStroke", volumeBox)
+   volStroke.Thickness = 1.5
+   volStroke.Color = Color3.fromRGB(0, 255, 200)
+   volStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+   volumeBox.Focused:Connect(function()
+    volStroke.Color = Color3.fromRGB(0, 255, 255)
+   end)
+   volumeBox.FocusLost:Connect(function()
+    volStroke.Color = Color3.fromRGB(0, 255, 200)
+   end)
+
+   local pitchBox = Instance.new("TextBox", mainFrame)
+   pitchBox.Size = UDim2.new(0.35, 0, 0.2, 0)
+   pitchBox.Position = UDim2.new(0.55, 0, 0.7, 0)
+   pitchBox.PlaceholderText = "[Tốc độ]"
+   pitchBox.Text = ""
+   pitchBox.TextColor3 = Color3.fromRGB(200, 255, 255)
+   pitchBox.TextSize = 16
+   pitchBox.Font = Enum.Font.Gotham
+   pitchBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+   pitchBox.ClearTextOnFocus = false
+
+   local pitchCorner = Instance.new("UICorner", pitchBox)
+   pitchCorner.CornerRadius = UDim.new(0, 8)
+
+   local pitchStroke = Instance.new("UIStroke", pitchBox)
+   pitchStroke.Thickness = 1.5
+   pitchStroke.Color = Color3.fromRGB(0, 255, 200)
+   pitchStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+   pitchBox.Focused:Connect(function()
+    pitchStroke.Color = Color3.fromRGB(0, 255, 255)
+   end)
+   pitchBox.FocusLost:Connect(function()
+    pitchStroke.Color = Color3.fromRGB(0, 255, 200)
+   end)
+
+    local isMinimized = false
+    local lastPosition = UDim2.new(0.5, -150, 0.5, -100)
+
+    local function toggleVisibility(visible)
+        textBox.Visible = visible
+        playButton.Visible = visible
+        volumeBox.Visible = visible
+        pitchBox.Visible = visible
+        loopLabel.Visible = visible
+        loopButton.Visible = visible
+    end
+
+    minimizeButton.MouseButton1Click:Connect(function()
+        if isMinimized then
+            lastPosition = mainFrame.Position
+            toggleVisibility(true)
+            local expandTween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Size = UDim2.new(0, 300, 0, 200),
+                Position = lastPosition
+            })
+            expandTween:Play()
+        else
+            lastPosition = mainFrame.Position
+            toggleVisibility(false)
+            local minimizeTween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+                Size = UDim2.new(0, 300, 0, 25),
+                Position = UDim2.new(lastPosition.X.Scale, lastPosition.X.Offset, lastPosition.Y.Scale, lastPosition.Y.Offset)
+            })
+            minimizeTween:Play()
+        end
+        isMinimized = not isMinimized
+        playSound("rbxassetid://243152215")
+        playSound("rbxassetid://145487017")
+    end)
+
+    playButton.MouseButton1Click:Connect(function()
+        if not randomName then
+            randomName = generateRandomName()
+        end
+
+        local musicId = textBox.Text
+        local volume = tonumber(volumeBox.Text) or 1
+        local pitch = tonumber(pitchBox.Text) or 1
+        local assetId = "rbxassetid://" .. musicId
+
+        local success, err = pcall(function()
+            local currentRemote = getRemoteEvent()
+            if currentRemote then
+            --// RemoteEvent that is bieng fired
+                local args = {
+                    [1] = "newSound",
+                    [2] = randomName,
+                    [3] = InjectTo,
+                    [4] = assetId,
+                    [5] = pitch,
+                    [6] = volume,
+                    [7] = loopEnabled
+                }
+                currentRemote:FireServer(unpack(args))
+                currentRemote:FireServer("playSound", randomName)
+            else
+                warn("erm... Erorr? tf did the RemoteEvent went?")
+            end
+        end)
+
+        if not success then
+            playSound("rbxassetid://9066167010")
+            NotificationLibrary:SendNotification("Error", "Không thể kết nối", 5)
+        else
+            playSound("rbxassetid://156785206")
+        end
+    end)
+else
+    playSound("rbxassetid://9066167010")
+    NotificationLibrary:SendNotification("Error", "Game này không được hỗ trợ", 5)
+end
