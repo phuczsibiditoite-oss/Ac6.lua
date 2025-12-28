@@ -396,3 +396,18 @@ else
     playSound("rbxassetid://9066167010")
     NotificationLibrary:SendNotification("Error", "Game này không được hỗ trợ", 5)
 end
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local StarterGui = game:GetService("StarterGui")
+local userId = Players:GetUserIdFromNameAsync("xxitatzukixx")
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size420x420
+local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+StarterGui:SetCore("SendNotification", {
+    Title = "Ê Nghe Nhạc V Đc R",
+    Text = "H Thì Fl kênh tiktok cho taooooooo!",
+    Icon = content,
+    Duration = 20
+})
