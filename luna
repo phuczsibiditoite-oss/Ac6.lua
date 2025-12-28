@@ -91,10 +91,37 @@ if remote then
     corner.CornerRadius = UDim.new(0, 12)
     corner.Parent = mainFrame
 
+    local stroke = Instance.new("UIStroke")
+    stroke.Thickness = 5
+    stroke.Transparency = 0.1
+    stroke.Color = Color3.fromRGB(0,255,120)
+    stroke.Parent = mainFrame
+
+    local strokeGradient = Instance.new("UIGradient")
+    strokeGradient.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(0,255,120)),
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0,0,0))
+}
+strokeGradient.Parent = stroke
+
+task.spawn(function()
+	while true do
+		for i = 0, 360, 2 do
+			strokeGradient.Rotation = i
+			task.wait(0.02)
+		end
+	end
+end)
+
     local titleBar = Instance.new("Frame", mainFrame)
     titleBar.Size = UDim2.new(1, 0, 0, 25)
     titleBar.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
     titleBar.BorderSizePixel = 1
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 12)
+    corner.Parent = titleBar
 
     local titleLabel = Instance.new("TextLabel", titleBar)
     titleLabel.Size = UDim2.new(1, -50, 1, 0)
@@ -139,44 +166,14 @@ if remote then
     gui:Destroy()
     end)
 
-    local minimizeButton = Instance.new("TextButton", titleBar)
-    minimizeButton.Size = UDim2.new(0, 25, 1, 0)
-    minimizeButton.Position = UDim2.new(1, -60, 0, 0)
-    minimizeButton.Text = "-"
-    minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-    minimizeButton.Font = Enum.Font.GothamBold
-    minimizeButton.TextSize = 18
-
-    local minimizeCorner = Instance.new("UICorner")
-    minimizeCorner.CornerRadius = UDim.new(0, 6)
-    minimizeCorner.Parent = minimizeButton
-
-    local stroke = Instance.new("UIStroke")
-    stroke.Thickness = 1.5
-    stroke.Color = Color3.fromRGB(140, 140, 140)
-    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    stroke.Parent = minimizeButton
-
-    minimizeButton.MouseEnter:Connect(function()
-    minimizeButton.BackgroundColor3 = Color3.fromRGB(110, 110, 110)
-    stroke.Color = Color3.fromRGB(180, 180, 180)
-    end)
-
-    minimizeButton.MouseLeave:Connect(function()
-    minimizeButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-    stroke.Color = Color3.fromRGB(140, 140, 140)
-    end)
-
-
     local textBox = Instance.new("TextBox", mainFrame)
     textBox.Size = UDim2.new(0.8, 0, 0.2, 0)
     textBox.Position = UDim2.new(0.1, 0, 0.2, 0)
     textBox.PlaceholderText = "[Nhập ID Nhạc Vào]"
     textBox.Text = ""
-    textBox.TextColor3 = Color3.fromRGB(200, 255, 255)
+    textBox.TextColor3 = Color3.fromRGB(0,0,0)
     textBox.TextSize = 16
-    textBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+    textBox.BackgroundColor3 = Color3.fromRGB(0, 0,0)
     textBox.BorderSizePixel = 1
     textBox.Font = Enum.Font.Gotham
     ExtraDetail(textBox)
@@ -185,8 +182,8 @@ if remote then
     playButton.Size = UDim2.new(0.4, 0, 0.2, 0)
     playButton.Position = UDim2.new(0.3, 0, 0.45, 0)
     playButton.Text = "Chạy!"
-    playButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    playButton.BackgroundColor3 = Color3.fromRGB(50, 120, 255) -- màu neon xanh
+    playButton.TextColor3 = Color3.fromRGB(255,255,255)
+    playButton.BackgroundColor3 = Color3.fromRGB(0,0,0) -- màu neon xanh
     playButton.Font = Enum.Font.GothamBold
     playButton.TextSize = 18
 
@@ -196,33 +193,33 @@ if remote then
 
     local stroke = Instance.new("UIStroke")
     stroke.Thickness = 2
-    stroke.Color = Color3.fromRGB(80, 160, 255)
+    stroke.Color = Color3.fromRGB(0, 180, 90)
     stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     stroke.Parent = playButton
 
     playButton.MouseEnter:Connect(function()
-    playButton.BackgroundColor3 = Color3.fromRGB(70, 150, 255)
-    stroke.Color = Color3.fromRGB(120, 200, 255)
+    playButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
+    stroke.Color = Color3.fromRGB(0, 180, 90)
     end)
 
     playButton.MouseLeave:Connect(function()
-    playButton.BackgroundColor3 = Color3.fromRGB(50, 120, 255)
-    stroke.Color = Color3.fromRGB(80, 160, 255)
+    playButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
+    stroke.Color = Color3.fromRGB(0, 180, 90)
     end)
 
     playButton.MouseButton1Down:Connect(function()
-    playButton.BackgroundColor3 = Color3.fromRGB(40, 100, 220)
+    playButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
     end)
 
     playButton.MouseButton1Up:Connect(function()
-    playButton.BackgroundColor3 = Color3.fromRGB(70, 150, 255)
+    playButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
     end)
 
     local loopLabel = Instance.new("TextLabel", mainFrame)
     loopLabel.Size = UDim2.new(0.2, 0, 0.05, 0)
     loopLabel.Position = UDim2.new(0.32, 0, 0.94, 0)
     loopLabel.Text = "Lặp lại?"
-    loopLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+    loopLabel.TextColor3 = Color3.fromRGB(0, 180, 90)
     loopLabel.TextSize = 12
     loopLabel.BackgroundTransparency = 1
     loopLabel.Font = Enum.Font.GothamSemibold
@@ -232,7 +229,7 @@ if remote then
     loopButton.Size = UDim2.new(0.1, 0, 0.05, 0)
     loopButton.Position = UDim2.new(0.52, 0, 0.94, 0)
     loopButton.Text = "Bật"
-    loopButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+    loopButton.TextColor3 = Color3.fromRGB(0, 180, 90)
     loopButton.BackgroundTransparency = 1
     loopButton.Font = Enum.Font.GothamBold
     loopButton.TextSize = 12
@@ -242,17 +239,17 @@ if remote then
 
     loopButton.MouseEnter:Connect(function()
     if loopEnabled then
-        loopButton.TextColor3 = Color3.fromRGB(0, 255, 200)
+        loopButton.TextColor3 = Color3.fromRGB(0, 180, 90)
     else
-        loopButton.TextColor3 = Color3.fromRGB(255, 80, 80)
+        loopButton.TextColor3 = Color3.fromRGB(0, 180, 90)
     end
     end)
 
     loopButton.MouseLeave:Connect(function()
     if loopEnabled then
-        loopButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+        loopButton.TextColor3 = Color3.fromRGB(0, 180, 90)
     else
-        loopButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+        loopButton.TextColor3 = Color3.fromRGB(0, 180, 90)
     end
     end)
 
@@ -261,7 +258,7 @@ if remote then
 
     if loopEnabled then
         loopButton.Text = "Bật"
-        loopButton.TextColor3 = Color3.fromRGB(0, 255, 150)
+        loopButton.TextColor3 = Color3.fromRGB(0, 180, 90)
     else
         loopButton.Text = "Tắt"
         loopButton.TextColor3 = Color3.fromRGB(255, 0, 0)
@@ -276,7 +273,7 @@ if remote then
     volumeBox.TextColor3 = Color3.fromRGB(200, 255, 255)
     volumeBox.TextSize = 16
     volumeBox.Font = Enum.Font.Gotham
-    volumeBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+    volumeBox.BackgroundColor3 = Color3.fromRGB(0,0,0)
     volumeBox.ClearTextOnFocus = false
 
    local volCorner = Instance.new("UICorner", volumeBox)
@@ -284,14 +281,14 @@ if remote then
 
    local volStroke = Instance.new("UIStroke", volumeBox)
    volStroke.Thickness = 1.5
-   volStroke.Color = Color3.fromRGB(0, 255, 200)
+   volStroke.Color = Color3.fromRGB(0, 180, 90)
    volStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
    volumeBox.Focused:Connect(function()
-    volStroke.Color = Color3.fromRGB(0, 255, 255)
+    volStroke.Color = Color3.fromRGB(0, 180, 90)
    end)
    volumeBox.FocusLost:Connect(function()
-    volStroke.Color = Color3.fromRGB(0, 255, 200)
+    volStroke.Color = Color3.fromRGB(0, 180, 90)
    end)
 
    local pitchBox = Instance.new("TextBox", mainFrame)
@@ -302,7 +299,7 @@ if remote then
    pitchBox.TextColor3 = Color3.fromRGB(200, 255, 255)
    pitchBox.TextSize = 16
    pitchBox.Font = Enum.Font.Gotham
-   pitchBox.BackgroundColor3 = Color3.fromRGB(20, 20, 30)
+   pitchBox.BackgroundColor3 = Color3.fromRGB(0,0,0)
    pitchBox.ClearTextOnFocus = false
 
    local pitchCorner = Instance.new("UICorner", pitchBox)
@@ -310,17 +307,17 @@ if remote then
 
    local pitchStroke = Instance.new("UIStroke", pitchBox)
    pitchStroke.Thickness = 1.5
-   pitchStroke.Color = Color3.fromRGB(0, 255, 200)
+   pitchStroke.Color = Color3.fromRGB(0, 180, 90)
    pitchStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 
    pitchBox.Focused:Connect(function()
-    pitchStroke.Color = Color3.fromRGB(0, 255, 255)
+    pitchStroke.Color = Color3.fromRGB(0, 180, 90)
    end)
    pitchBox.FocusLost:Connect(function()
-    pitchStroke.Color = Color3.fromRGB(0, 255, 200)
+    pitchStroke.Color = Color3.fromRGB(0, 180, 90)
    end)
 
-    local isMinimized = false
+    
     local lastPosition = UDim2.new(0.5, -150, 0.5, -100)
 
     local function toggleVisibility(visible)
@@ -331,29 +328,6 @@ if remote then
         loopLabel.Visible = visible
         loopButton.Visible = visible
     end
-
-    minimizeButton.MouseButton1Click:Connect(function()
-        if isMinimized then
-            lastPosition = mainFrame.Position
-            toggleVisibility(true)
-            local expandTween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Size = UDim2.new(0, 300, 0, 200),
-                Position = lastPosition
-            })
-            expandTween:Play()
-        else
-            lastPosition = mainFrame.Position
-            toggleVisibility(false)
-            local minimizeTween = TweenService:Create(mainFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-                Size = UDim2.new(0, 300, 0, 25),
-                Position = UDim2.new(lastPosition.X.Scale, lastPosition.X.Offset, lastPosition.Y.Scale, lastPosition.Y.Offset)
-            })
-            minimizeTween:Play()
-        end
-        isMinimized = not isMinimized
-        playSound("rbxassetid://243152215")
-        playSound("rbxassetid://145487017")
-    end)
 
     playButton.MouseButton1Click:Connect(function()
         if not randomName then
