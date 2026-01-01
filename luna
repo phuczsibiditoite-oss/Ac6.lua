@@ -19,12 +19,7 @@ local replicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
 local TweenService = game:GetService("TweenService")
 
--- // Bc of some games that simply make anticheats that delete new Instances of audios in workspace-
--- // the audio will be parented to the TestService, if the script says theres AC6 and the id your trying to play-
-local InjectTo = game:GetService("TestService") -- is valid, Parent it to some where else
---[[ oh and btw you can Parent it to a specific part and that part will play audio
-   when you get close to it, like a Radio ill emit sounds, yes even your humanoidRootPart]]
-
+local InjectTo = game:GetService("TestService")
 local specialChars = "1234567890QWRYUIOPASDFGHJKLZXVBMN+×÷=/_<>,!@#$%^&*?`~\\|{}€£¥₩qwertyuiopasdfghjklzxcvbnm"
 local randomName = nil
 
@@ -47,7 +42,7 @@ local function findRemoteEvent(name, parent)
     return nil
 end
 
-local function getRemoteEvent() --// Change if the games have Renamed the AC6 Remotes name
+local function getRemoteEvent()
     return findRemoteEvent("AC6_FE_Sounds", replicatedStorage) or findRemoteEvent("AC6_FE_Sounds", workspace)
 end
 
@@ -66,7 +61,6 @@ local function ExtraDetail(UI)
     Stroke.ApplyStrokeMode = "Border"
 end
 
---// UI library for the notification (not mine) credits to who ever made it :]
 local NotificationLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/IceMinisterq/Notification-Library/Main/Library.lua"))()
 
 local remote = getRemoteEvent()
@@ -127,7 +121,7 @@ end)
     titleLabel.Size = UDim2.new(1, -50, 1, 0)
     titleLabel.Position = UDim2.new(0, 5, 0, 0)
     titleLabel.Text = "FE MUSIC EXPLOIT [By Phucs]"
-    titleLabel.TextColor3 = Color3.fromRGB(0, 255, 200)
+    titleLabel.TextColor3 = Color3.fromRGB(255,255,255)
     titleLabel.TextSize = 18
     titleLabel.BackgroundTransparency = 1
     titleLabel.Font = Enum.Font.SourceSansBold
@@ -173,7 +167,7 @@ end)
     textBox.Text = ""
     textBox.TextColor3 = Color3.fromRGB(0,0,0)
     textBox.TextSize = 16
-    textBox.BackgroundColor3 = Color3.fromRGB(0, 0,0)
+    textBox.BackgroundColor3 = Color3.fromRGB(20,20,30)
     textBox.BorderSizePixel = 1
     textBox.Font = Enum.Font.Gotham
     ExtraDetail(textBox)
@@ -183,7 +177,7 @@ end)
     playButton.Position = UDim2.new(0.3, 0, 0.45, 0)
     playButton.Text = "Chạy!"
     playButton.TextColor3 = Color3.fromRGB(255,255,255)
-    playButton.BackgroundColor3 = Color3.fromRGB(0,0,0) -- màu neon xanh
+    playButton.BackgroundColor3 = Color3.fromRGB(35,35,50)
     playButton.Font = Enum.Font.GothamBold
     playButton.TextSize = 18
 
@@ -203,7 +197,7 @@ end)
     end)
 
     playButton.MouseLeave:Connect(function()
-    playButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
+    playButton.BackgroundColor3 = Color3.fromRGB(35,35,50)
     stroke.Color = Color3.fromRGB(0, 180, 90)
     end)
 
@@ -273,7 +267,7 @@ end)
     volumeBox.TextColor3 = Color3.fromRGB(200, 255, 255)
     volumeBox.TextSize = 16
     volumeBox.Font = Enum.Font.Gotham
-    volumeBox.BackgroundColor3 = Color3.fromRGB(0,0,0)
+    volumeBox.BackgroundColor3 = Color3.fromRGB(20,20,30)
     volumeBox.ClearTextOnFocus = false
 
    local volCorner = Instance.new("UICorner", volumeBox)
@@ -299,7 +293,7 @@ end)
    pitchBox.TextColor3 = Color3.fromRGB(200, 255, 255)
    pitchBox.TextSize = 16
    pitchBox.Font = Enum.Font.Gotham
-   pitchBox.BackgroundColor3 = Color3.fromRGB(0,0,0)
+   pitchBox.BackgroundColor3 = Color3.fromRGB(20,20,30)
    pitchBox.ClearTextOnFocus = false
 
    local pitchCorner = Instance.new("UICorner", pitchBox)
